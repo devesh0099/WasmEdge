@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Compare the two files
-if diff -q whitelist.symbols libwasmedge.symbols > /dev/null; then
+if diff -q ./lib/api/whitelist.symbols libwasmedge.symbols > /dev/null; then
     echo "No additional symbols exposed. Deleting the generated symbols file."
     rm libwasmedge.symbols
 else
