@@ -51,8 +51,8 @@ jobs:
           cmake --build build
       - name: Test for Exposed symbols
         run: |
-          dpkg-gensymbols -ebuild/lib/api/libwasmedge.so -Olibwasmedge.symbols
-          sed -i '1d' libwasmedge.symbols
+          nm -D --defined-only /usr/lib64/libwasmedge.so > libwasmedge.symbols
+          awk '{print $3}' libwasmedge.symbols > file && mv temp libwasmedge.symbol
           ./.github/scripts/.check-symbols.sh
       - name: Test WasmEdge
         run: |
