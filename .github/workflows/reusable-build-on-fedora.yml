@@ -53,7 +53,7 @@ jobs:
         run: |
           nm -D --defined-only ./build/lib/api/libwasmedge.so > libwasmedge.symbols
           awk '{print $3}' libwasmedge.symbols > file && mv file libwasmedge.symbols
-          ./.github/scripts/.check-symbols.sh
+          bash ./.github/scripts/check-symbols.sh
       - name: Test WasmEdge
         run: |
           export LD_LIBRARY_PATH="$(pwd)/build/lib/api:$LD_LIBRARY_PATH"
