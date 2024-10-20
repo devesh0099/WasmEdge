@@ -49,6 +49,11 @@ jobs:
         run: |
           cmake -Bbuild -GNinja -DCMAKE_BUILD_TYPE=Release -DWASMEDGE_BUILD_TESTS=ON -DWASMEDGE_BUILD_PACKAGE="TGZ;DEB;RPM" .
           cmake --build build
+      - name: Test for Exposed symbols
+        run: |
+          dpkg-gensymbols -ebuild/lib/api/libwasmedge.so -Olibwasmedge.symbols
+          sed -i '1d' libwasmedge.symbols
+          ./.github/scripts/.check-symbols.sh
       - name: Test WasmEdge
         run: |
           export LD_LIBRARY_PATH="$(pwd)/build/lib/api:$LD_LIBRARY_PATH"
