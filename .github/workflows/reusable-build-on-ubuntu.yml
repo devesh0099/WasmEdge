@@ -73,6 +73,9 @@ jobs:
           ./tools/wasmedge/wasmedge -v
           ctest
           cd -
+          nm -D --defined-only ./build/lib/api/libwasmedge.so > libwasmedge.txt
+          awk '{print $3}' libwasmedge.txt > file && mv file libwasmedge.txt
+          bash ./.github/scripts/check-symbols.sh
       - name: Build (${{ matrix.compiler }}, Coverage)
         if: ${{ matrix.coverage }}
         run: |

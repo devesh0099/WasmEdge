@@ -64,6 +64,9 @@ jobs:
         run: |
           eval $(/opt/homebrew/bin/brew shellenv)
           export DYLD_LIBRARY_PATH="$(pwd)/build/lib/api:$DYLD_LIBRARY_PATH"
+          nm -D --defined-only ./build/lib/api/libwasmedge.so > libwasmedge.txt
+          awk '{print $3}' libwasmedge.txt > file && mv file libwasmedge.txt
+          bash ./.github/scripts/check-symbols.sh
           cd build
           ctest
       - name: Create package tarball
