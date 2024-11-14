@@ -2,16 +2,6 @@ name: Build on MacOS test version
 
 on:
   pull_request:
-  workflow_call:
-    inputs:
-      version:
-        type: string
-        required: true
-      matrix: # [ { name, runner, darwin_version }, ... ]
-        type: string
-        required: true
-      release:
-        type: boolean
 
 permissions:
   contents: read
