@@ -1,17 +1,7 @@
-name: Build on MacOS
+name: Build on MacOS test version
 
 on:
-  workflow_dispatch:
-  workflow_call:
-    inputs:
-      version:
-        type: string
-        required: true
-      matrix: # [ { name, runner, darwin_version }, ... ]
-        type: string
-        required: true
-      release:
-        type: boolean
+  pull_request:
 
 permissions:
   contents: read
